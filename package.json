@@ -117,6 +117,7 @@
       "createDesktopShortcut": "always",
       "createStartMenuShortcut": true,
       "shortcutName": "仓库管理",
+      "include": null,
       "installerLanguages": ["zh_CN"],
       "language": "2052",
       "warningsAsErrors": false,
