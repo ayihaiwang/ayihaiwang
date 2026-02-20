@@ -102,9 +102,7 @@
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
+          "arch": ["x64"]
         }
       ],
       "icon": "public/icon.ico",
@@ -119,7 +117,6 @@
       "createDesktopShortcut": "always",
       "createStartMenuShortcut": true,
       "shortcutName": "仓库管理",
-      "include": "build/installer.nsh",
       "installerLanguages": ["zh_CN"],
       "language": "2052",
       "warningsAsErrors": false,
@@ -128,9 +125,7 @@
       "artifactName": "${productName}-${version}-Setup.${ext}"
     },
     "linux": {
-      "target": [
-        "AppImage"
-      ],
+      "target": ["AppImage"],
       "icon": "public/icon.png",
       "category": "Office"
     }
