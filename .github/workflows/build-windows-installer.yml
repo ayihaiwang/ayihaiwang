@@ -20,18 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build server
-        run: npm run server:build
-
-      - name: Compile electron
-        run: npm run compile
-
-      - name: Build frontend
-        run: npm run build
-
-      - name: Rebuild native modules
-        run: npm run rebuild:native
-
       - name: Build Windows installer
         run: npm run dist:win
 
