@@ -91,10 +91,6 @@
       {
         "from": "server/dist",
         "to": "server/dist"
-      },
-      {
-        "from": "package.json",
-        "to": "package.json"
       }
     ],
     "asarUnpack": [
