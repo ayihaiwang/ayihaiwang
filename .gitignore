@@ -1,0 +1,2 @@
+# Server TS 编译产物（运行时用 tsx 直接跑 TS，不再双写）
+server/**/*.js

@@ -1,0 +1,142 @@
+{
+  "name": "warehouse-app",
+  "version": "1.0.0",
+  "description": "仓库管理出入库+统计+申报对比",
+  "main": "dist-electron/main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npm run compile && concurrently \"vite\" \"wait-on http://localhost:5173 && ./scripts/run-electron.sh .\"",
+    "build": "npm run compile && npm run server:build && vite build && electron-builder",
+    "build:win": "npm run compile && npm run server:build && vite build && electron-builder --win",
+    "dist:win": "npm run compile && npm run server:build && vite build && electron-builder --win --publish never",
+    "build:linux": "npm run compile && npm run server:build && vite build && electron-builder --linux",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && ./scripts/run-electron.sh .\"",
+    "dev:web": "concurrently \"vite --port 5173 --strictPort\" \"tsx server/index.ts\"",
+    "dev:desktop": "npm run compile && concurrently \"vite\" \"wait-on http://localhost:5173 && ./scripts/run-electron.sh .\"",
+    "start:server": "tsx server/index.ts",
+    "compile": "tsc -p tsconfig.electron.json",
+    "server:build": "tsc -p server/tsconfig.build.json",
+    "server:clean": "rimraf server/dist",
+    "rebuild:native": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-builder install-app-deps",
+    "predist:win": "npm run rebuild:native"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/multipart": "^8.3.1",
+    "@fastify/static": "^9.0.0",
+    "antd": "^5.21.0",
+    "better-sqlite3": "^11.5.0",
+    "dayjs": "^1.11.13",
+    "echarts": "^5.5.0",
+    "echarts-for-react": "^3.0.2",
+    "electron": "27.3.11",
+    "exceljs": "^4.4.0",
+    "fastify": "^4.29.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-resizable": "^3.1.3",
+    "react-router-dom": "^6.28.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/react-resizable": "^3.0.8",
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.0.1",
+    "electron-builder": "^25.1.8",
+    "electron-rebuild": "^3.2.9",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "wait-on": "^8.0.1"
+  },
+  "build": {
+    "appId": "com.warehouse.app",
+    "productName": "仓库管理",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "server/dist/**/*",
+      "package.json",
+      "node_modules/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+      "!server/**/*.ts",
+      "!server/**/*.ts.map"
+    ],
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "server/dist",
+        "to": "server/dist"
+      },
+      {
+        "from": "package.json",
+        "to": "package.json"
+      }
+    ],
+    "asarUnpack": [
+      "**/better-sqlite3/**/*",
+      "**/server/dist/**/*",
+      "**/*.node"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "publisherName": "仓库管理系统"
+    },
+    "nsis": {
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false,
+      "allowElevation": true,
+      "perMachine": false,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "仓库管理",
+      "include": "build/installer.nsh",
+      "installerLanguages": ["zh_CN"],
+      "language": "2052",
+      "warningsAsErrors": false,
+      "runAfterFinish": false,
+      "menuCategory": false,
+      "artifactName": "${productName}-${version}-Setup.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "icon": "public/icon.png",
+      "category": "Office"
+    }
+  }
+}
