@@ -52,6 +52,7 @@
     "@types/react-resizable": "^3.0.8",
     "@vitejs/plugin-react": "^4.3.3",
     "concurrently": "^9.0.1",
+    "electron": "27.3.11",
     "electron-builder": "^25.1.8",
     "electron-rebuild": "^3.2.9",
     "rimraf": "^5.0.5",
