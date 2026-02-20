@@ -1,0 +1,30 @@
+========================================
+GitHub Actions 构建问题解决
+========================================
+
+【问题 1：Node.js 版本不兼容】
+✅ 已修复：升级到 Node.js 20
+✅ 已更新：.github/workflows/build-windows-installer.yml
+
+【问题 2：package-lock.json 不同步】
+✅ 已修复：改用 npm install 替代 npm ci
+✅ 已更新：.github/workflows/build-windows-installer.yml
+
+【问题 3：server/tsconfig.build.json 缺失】
+✅ 已修复：文件已提交到 Git
+✅ 文件位置：server/tsconfig.build.json
+
+【下一步操作】
+1. 确认文件已推送到 GitHub：
+   - 在 GitHub 仓库页面检查 server/tsconfig.build.json 是否存在
+
+2. 重新触发构建：
+   - 在 GitHub Actions 页面点击 "Run workflow"
+
+3. 如果仍然失败：
+   - 检查 GitHub 仓库中文件是否存在
+   - 确认推送到的是正确的分支
+
+========================================
+文件已提交并推送，可以重新触发构建！
+========================================
