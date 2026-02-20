@@ -305,7 +305,7 @@ fastify.post('/api/db/import', async (request) => {
     throw new Error('No file uploaded');
   }
   const buffer = await data.toBuffer();
-  return importBackup(buffer.buffer);
+  return importBackup(buffer.buffer as ArrayBuffer);
 });
 
 // 启动服务器
