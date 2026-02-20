@@ -443,7 +443,7 @@ fastify.post('/api/db/import', async (request) => {
     throw new Error('No file uploaded');
   }
   const buffer = await data.toBuffer();
-  return importBackup(buffer.buffer);
+  return importBackup(buffer.buffer as ArrayBuffer);
 });
 
 // 错误处理：翻译数据库错误消息
