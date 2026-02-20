@@ -102,8 +102,8 @@ export function docCreate(input: DocCreateInput): { id: number } {
           item_id: line.item_id,
           qty_delta: qtyDelta,
           doc_id: docId,
-          operator: input.operator ?? null,
-          remark: line.remark ?? null,
+          operator: input.operator ?? undefined,
+          remark: line.remark ?? undefined,
         });
         stocksUpdate(line.item_id, qtyDelta);
       }
